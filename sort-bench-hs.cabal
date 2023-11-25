@@ -19,9 +19,11 @@ common warnings
 executable sort-bench-hs
     import:           warnings
     main-is:          Main.hs
-    -- other-modules:
+    other-modules:    OtherSorts
     -- other-extensions:
-    build-depends:    base ^>=4.17.2.0
+    build-depends:    base >= 4.8.0.0 && < 5
                     , criterion
+                    , vector
+                    , deepseq
     hs-source-dirs:   app
     default-language: Haskell2010
