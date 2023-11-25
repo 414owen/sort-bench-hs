@@ -1,6 +1,8 @@
 {-# LANGUAGE NumericUnderscores  #-}
 
-module Main where
+module Main
+  ( main
+  ) where
 
 import Control.DeepSeq
 import Criterion.Main
@@ -62,7 +64,8 @@ sorts =
   [ ("sortOn", sortOn)
   , ("sortWith", sortWith)
   , ("sortBy . comparing", sortWith')
-  , ("mergeWortWith", mergeSortWith)
+  , ("mergeSortWithVec", mergeSortWithVec)
+  , ("mergeSortWithList", mergeSortWithList)
   ]
 
 runSorts :: (NFData a, Ord b) => String -> (a -> b) -> [a] -> Benchmark
