@@ -6,6 +6,7 @@ module Main
 
 import Control.DeepSeq
 import Criterion.Main
+import Data.Ord (comparing)
 import Data.List
 import Data.Tuple
 import GHC.Exts (sortWith)
@@ -59,20 +60,19 @@ nestedRTupList = toNestedSnd <$> aList
 
 -- * Test tree
 
-sorts :: Ord b => [(String, (a -> b) -> [a] -> [a])]
-sorts =
-  [ ("sortOn", sortOn)
-  , ("sortWith", sortWith)
-  , ("sortBy . comparing", sortWith')
-  , ("mergeSortWithVec", mergeSortWithVec)
-  , ("mergeSortWithList", mergeSortWithList)
-  ]
-
 runSorts :: (NFData a, Ord b) => String -> (a -> b) -> [a] -> Benchmark
-runSorts projString projection list
-  = bgroup (projString <> " projection")
-  $ flip fmap sorts
-  $ \(sortStr, sortFn) -> bench sortStr $ nf (sortFn projection) list
+runSorts projString projection list = do
+  bgroup (projString <> " projection")
+    [ bench "length" $ nf length list
+    , bench "runs" $ nf (runs $ comparing projection) list
+    , bench "calcAggregates" $ nf (calcAggregates $ comparing projection) list
+    , bench "sortOn" $ nf (sortOn projection) list
+    , bench "sortWith" $ nf (sortWith projection) list
+    , bench "sortBy . comparing" $ nf (sortWith' projection) list
+    , bench "mergeSortOnBottomUp" $ nf (mergeSortOnBottomUp projection) list
+    , bench "mergeSortWithVec" $ nf (mergeSortWithVec projection) list
+    , bench "mergeSortWithList" $ nf (mergeSortWithList projection) list
+    ]
 
 main :: IO ()
 main = defaultMain
