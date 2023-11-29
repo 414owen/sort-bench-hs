@@ -13,17 +13,29 @@ build-type:         Simple
 extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
-common warnings
-    ghc-options: -Wall
+common commons
+    ghc-options: -Wall -Wextra
+    default-language: Haskell2010
 
-executable sort-bench-hs
-    import:           warnings
+library
+    import:           commons
+    exposed-modules:  Sorts.MergeSortTopDown
+                    , Sorts.MergeSortTopDownWithVec
+                    , Sorts.MergeSortBottomUp
+                    , Sorts.VectorSort
+    build-depends:    base >= 4.8.0.0 && < 5
+                    , vector
+                    , vector-algorithms
+                    , primitive-sort
+    hs-source-dirs:   src
+
+executable bench
+    import:           commons
     main-is:          Main.hs
     other-modules:    OtherSorts
     -- other-extensions:
     build-depends:    base >= 4.8.0.0 && < 5
                     , criterion
-                    , vector
                     , deepseq
+                    , sort-bench-hs
     hs-source-dirs:   app
-    default-language: Haskell2010
