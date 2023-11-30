@@ -20,10 +20,13 @@ common commons
 library
     import:           commons
     exposed-modules:  Sorts.MergeSortTopDown
+    exposed-modules:  Sorts.MergeSortTopDownAlternating
                     , Sorts.MergeSortTopDownWithVec
                     , Sorts.MergeSortBottomUp
                     , Sorts.VectorSort
-                    , Sorts.PrimSort
+                    , Sorts.PrimMergeSort
+                    , Sorts.QuickSort
+                    , Sorts.InsertionSort
     build-depends:    base >= 4.8.0.0 && < 5
                     , vector
                     , vector-algorithms
@@ -39,4 +42,14 @@ executable bench
                     , criterion
                     , deepseq
                     , sort-bench-hs
+                    , MonadRandom
     hs-source-dirs:   app
+
+test-suite tests
+  import:             commons
+  type:               exitcode-stdio-1.0
+  hs-source-dirs:     test
+  main-is:            Main.hs
+  build-depends:      base >= 4.8.0.0 && < 5
+                    , QuickCheck
+                    , sort-bench-hs

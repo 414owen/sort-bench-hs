@@ -2,26 +2,25 @@ module Sorts.MergeSortTopDown
   ( sortBy
   ) where
 
--- | Simple top-down mergeSort
 sortBy :: (a -> a -> Ordering) -> [a] -> [a]
-sortBy _ [] = []
-sortBy _ [a] = [a]
-sortBy f list
-  = let (l, r) = splitList list in
-  mergeBy f (sortBy f l) (sortBy f r)
+sortBy f lst = sortBy' f len lst
+  where
+    len = length lst
 
-splitList :: [a] -> ([a], [a])
-splitList = splitList' ([], [])
-
-splitList' :: ([a], [a]) -> [a] -> ([a], [a])
-splitList' (outX, outY) inputs = case inputs of
-  (x1 : x2 : xs) -> splitList' (x1 : outX, x2 : outY) xs
-  [x] -> (x : outX, outY)
-  [] -> (outX, outY)
+-- | Simple top-down mergeSort
+sortBy' :: (a -> a -> Ordering) -> Int -> [a] -> [a]
+sortBy' f len lst
+  | len <= 1 = lst
+  | otherwise =
+      let 
+        lenA = len `div` 2
+        (l, r) = splitAt lenA lst
+      in
+      mergeBy f (sortBy' f lenA l) (sortBy' f (len - lenA) r)
 
 mergeBy :: (a -> a -> Ordering) -> [a] -> [a] -> [a]
 mergeBy f l@(x : xs) r@(y : ys) = case f x y of
-  LT -> x : mergeBy f xs r
   GT -> y : mergeBy f l ys
-  EQ -> x : y : mergeBy f xs ys
-mergeBy _ _ _ = []
+  _ -> x : mergeBy f xs r
+mergeBy _ [] xs = xs
+mergeBy _ xs [] = xs

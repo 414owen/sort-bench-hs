@@ -5,13 +5,12 @@ module Sorts.MergeSortTopDownWithVec
   ) where
 
 import Data.Vector (Vector)
-import qualified Data.List   as List
 import qualified Data.Vector as V
 
 -- | Simple out-of-place mergeSort
 -- Creates a vector from the input for O(1) slicing
 sortBy :: forall a. (a -> a -> Ordering) -> [a] -> [a]
-sortBy f lst = go $ V.fromList lst
+sortBy f = go . V.fromList
   where
     go :: Vector a -> [a]
     go v
@@ -26,5 +25,6 @@ mergeBy :: (a -> a -> Ordering) -> [a] -> [a] -> [a]
 mergeBy f l@(x : xs) r@(y : ys) = case f x y of
   LT -> x : mergeBy f xs r
   GT -> y : mergeBy f l ys
-  EQ -> x : y : mergeBy f xs ys
-mergeBy _ _ _ = []
+  EQ -> x : mergeBy f xs r
+mergeBy _ [] xs = xs
+mergeBy _ xs [] = xs
