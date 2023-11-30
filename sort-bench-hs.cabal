@@ -23,10 +23,11 @@ library
                     , Sorts.MergeSortTopDownWithVec
                     , Sorts.MergeSortBottomUp
                     , Sorts.VectorSort
+                    , Sorts.PrimSort
     build-depends:    base >= 4.8.0.0 && < 5
                     , vector
                     , vector-algorithms
-                    , primitive-sort
+                    , primitive
     hs-source-dirs:   src
 
 executable bench
