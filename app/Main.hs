@@ -60,14 +60,14 @@ runSorts projString cmp list = do
     -- , bench "runs" $ nf (runs cmp) list
     -- , bench "calcAggregates" $ nf (calcAggregates cmp) list
       bench "sortBy" $ nf (sortBy cmp) list
-    , bench "insertionSort" $ nf (IS.sortBy cmp) list
+    -- , bench "insertionSort" $ nf (IS.sortBy cmp) list
     , bench "mergeSortTopDown" $ nf (MSTD.sortBy cmp) list
     , bench "mergeSortTopDownAlternating" $ nf (MSTDA.sortBy cmp) list
-    -- , bench "mergeSortTopDownWithVec" $ nf (MSTDV.sortBy cmp) list
+    , bench "mergeSortTopDownWithVec" $ nf (MSTDV.sortBy cmp) list
     , bench "mergeSortBottomUp" $ nf (MSBU.sortBy cmp) list
-    -- , bench "vectorSort" $ nf (VS.sortBy cmp) list
-    , bench "quickSort" $ nf (QS.sortBy cmp) list
-    -- , bench "primSort" $ nf (PS.sortBy cmp) list
+    , bench "vectorSort" $ nf (VS.sortBy cmp) list
+    -- , bench "quickSort" $ nf (QS.sortBy cmp) list
+    , bench "primSort" $ nf (PS.sortBy cmp) list
     ]
 
 listLength :: Int
