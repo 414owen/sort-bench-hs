@@ -45,10 +45,11 @@ randomSeed = mkStdGen 42
 listVariants :: [(String, [Int])]
 listVariants =
   -- Lots of runs, Lots of same elements
-  [ ("cycled permutations", cycle $ concat $ permutations [0..20])
-  , ("already sorted list", [0..])
-  , ("descending sorted list", [0, (-1) ..])
-  , ("completely random list", randoms randomSeed)
+  [
+  --   ("cycled permutations", cycle $ concat $ permutations [0..20])
+    ("already sorted list", [0..])
+  -- ("descending sorted list", [0, (-1) ..])
+  -- ("completely random list", randoms randomSeed)
   ]
 
 -- * Test tree
@@ -73,7 +74,7 @@ runSorts projString cmp list = do
     ]
 
 listLength :: Int
-listLength = 10_000
+listLength = 100_000
 
 main :: IO ()
 main = defaultMain $ flip fmap listVariants $ \(variantName, take listLength -> lst) ->

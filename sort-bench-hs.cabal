@@ -46,6 +46,17 @@ executable bench
                     , MonadRandom
     hs-source-dirs:   app
 
+executable bench-list-append
+    import:           commons
+    main-is:          DListVsReverseCons.hs
+    -- other-extensions:
+    build-depends:    base >= 4.8.0.0 && < 5
+                    , criterion
+                    , deepseq
+                    , sort-bench-hs
+                    , MonadRandom
+    hs-source-dirs:   app
+
 test-suite tests
   import:             commons
   type:               exitcode-stdio-1.0
