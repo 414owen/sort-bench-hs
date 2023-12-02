@@ -4,6 +4,9 @@ module Sorts.MergeSortBottomUpDList
   ( sortBy
   ) where
 
+-- This is pretty much identical to the `sortBy` actually used
+-- in `base`.
+
 sortBy :: forall a. (a -> a -> Ordering) -> [a] -> [a]
 sortBy f = mergeSort f . runs f
 
