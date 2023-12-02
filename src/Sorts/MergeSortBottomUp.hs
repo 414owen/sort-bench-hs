@@ -10,13 +10,18 @@ sortBy f = mergeSort f . runs f
 runs :: forall a. (a -> a -> Ordering) -> [a] -> [[a]]
 runs f (x1 : x2 : xs) = case f x1 x2 of
   GT -> let (l, rest) = descRun x2 [x2, x1] xs in l : runs f rest
-  _ -> let (l, rest) = ascRun x2 [] xs in (x1 : x2 : reverse l) : runs f rest
+  _ -> let (l, rest) = ascRun x2 ([x1, x2] ++) xs in l : runs f rest
 
   where
-    ascRun :: a -> [a] -> [a] -> ([a], [a])
+    ascRun :: a -> ([a] -> [a]) -> [a] -> ([a], [a])
     ascRun lastEl acc (y1 : ys)
-      | f lastEl y1 /= GT = ascRun y1 (y1 : acc) ys
-    ascRun _ acc rest = (acc, rest)
+      | f lastEl y1 /= GT = ascRun y1 (acc . (y1 :)) ys
+    ascRun _ acc rest = (acc [], rest)
+
+    -- ascRun :: a -> [a] -> [a] -> ([a], [a])
+    -- ascRun lastEl acc (y1 : ys)
+    --   | f lastEl y1 /= GT = ascRun y1 (y1 : acc) ys
+    -- ascRun _ acc rest = (acc, rest)
 
     descRun :: a -> [a] -> [a] -> ([a], [a])
     descRun lastEl acc (y1 : ys)
