@@ -23,6 +23,7 @@ library
     exposed-modules:  Sorts.MergeSortTopDownAlternating
                     , Sorts.MergeSortTopDownWithVec
                     , Sorts.MergeSortBottomUp
+                    , Sorts.MergeSortBottomUpBalanced
                     , Sorts.MergeSortBottomUpDList
                     , Sorts.VectorSort
                     , Sorts.PrimMergeSort

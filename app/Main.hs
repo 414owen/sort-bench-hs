@@ -17,6 +17,7 @@ import qualified Sorts.InsertionSort               as IS
 import qualified Sorts.MergeSortTopDown            as MSTD
 import qualified Sorts.MergeSortTopDownAlternating as MSTDA
 import qualified Sorts.MergeSortBottomUp           as MSBU
+import qualified Sorts.MergeSortBottomUpBalanced   as MSBUB
 import qualified Sorts.MergeSortBottomUpDList      as MSBUD
 import qualified Sorts.MergeSortTopDownWithVec     as MSTDV
 import qualified Sorts.PrimMergeSort               as PS
@@ -67,6 +68,7 @@ runSorts projString cmp list = do
     -- , bench "mergeSortTopDownAlternating" $ nf (MSTDA.sortBy cmp) list
     -- , bench "mergeSortTopDownWithVec" $ nf (MSTDV.sortBy cmp) list
     , bench "mergeSortBottomUp" $ nf (MSBU.sortBy cmp) list
+    , bench "mergeSortBottomUpBalanced" $ nf (MSBU.sortBy cmp) list
     , bench "mergeSortBottomUpDLIst" $ nf (MSBUD.sortBy cmp) list
     -- , bench "vectorSort" $ nf (VS.sortBy cmp) list
     -- , bench "quickSort" $ nf (QS.sortBy cmp) list
