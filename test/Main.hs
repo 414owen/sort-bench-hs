@@ -10,6 +10,7 @@ import System.Exit
 import qualified Data.List                         as L
 import qualified Sorts.InsertionSort               as IS
 import qualified Sorts.MergeSortBottomUp           as MSBU
+import qualified Sorts.MergeSortBottomUpDList      as MSBUD
 import qualified Sorts.MergeSortTopDownAlternating as MSTDA
 import qualified Sorts.MergeSortTopDown            as MSTD
 import qualified Sorts.MergeSortTopDownWithVec     as MSTDV
@@ -28,6 +29,9 @@ mergeSortTopDownWithVecProp lst = L.sortBy (comparing fst) lst === MSTDV.sortBy 
 
 mergeSortBottomUpProp :: [(Int, Int)] -> Property
 mergeSortBottomUpProp lst = L.sortBy (comparing fst) lst === MSBU.sortBy (comparing fst) lst
+
+mergeSortBottomUpDListProp :: [(Int, Int)] -> Property
+mergeSortBottomUpDListProp lst = L.sortBy (comparing fst) lst === MSBUD.sortBy (comparing fst) lst
 
 vectorSortProp :: [(Int, Int)] -> Property
 vectorSortProp lst = L.sortBy (comparing fst) lst === VS.sortBy (comparing fst) lst
@@ -53,6 +57,7 @@ main = do
   check mergeSortTopDownAlternatingProp
   check mergeSortTopDownWithVecProp
   check mergeSortBottomUpProp
+  check mergeSortBottomUpDListProp
   check quickSortProp
   check vectorSortProp
   check primSortProp

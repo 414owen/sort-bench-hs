@@ -17,6 +17,7 @@ import qualified Sorts.InsertionSort               as IS
 import qualified Sorts.MergeSortTopDown            as MSTD
 import qualified Sorts.MergeSortTopDownAlternating as MSTDA
 import qualified Sorts.MergeSortBottomUp           as MSBU
+import qualified Sorts.MergeSortBottomUpDList      as MSBUD
 import qualified Sorts.MergeSortTopDownWithVec     as MSTDV
 import qualified Sorts.PrimMergeSort               as PS
 import qualified Sorts.QuickSort                   as QS
@@ -59,15 +60,16 @@ runSorts projString cmp list = do
     --   bench "length" $ nf length list
     -- , bench "runs" $ nf (runs cmp) list
     -- , bench "calcAggregates" $ nf (calcAggregates cmp) list
-      bench "sortBy" $ nf (sortBy cmp) list
+    --   bench "sortBy" $ nf (sortBy cmp) list
     -- , bench "insertionSort" $ nf (IS.sortBy cmp) list
-    , bench "mergeSortTopDown" $ nf (MSTD.sortBy cmp) list
-    , bench "mergeSortTopDownAlternating" $ nf (MSTDA.sortBy cmp) list
-    , bench "mergeSortTopDownWithVec" $ nf (MSTDV.sortBy cmp) list
+      bench "mergeSortTopDown" $ nf (MSTD.sortBy cmp) list
+    -- , bench "mergeSortTopDownAlternating" $ nf (MSTDA.sortBy cmp) list
+    -- , bench "mergeSortTopDownWithVec" $ nf (MSTDV.sortBy cmp) list
     , bench "mergeSortBottomUp" $ nf (MSBU.sortBy cmp) list
-    , bench "vectorSort" $ nf (VS.sortBy cmp) list
+    , bench "mergeSortBottomUpDLIst" $ nf (MSBUD.sortBy cmp) list
+    -- , bench "vectorSort" $ nf (VS.sortBy cmp) list
     -- , bench "quickSort" $ nf (QS.sortBy cmp) list
-    , bench "primSort" $ nf (PS.sortBy cmp) list
+    -- , bench "primSort" $ nf (PS.sortBy cmp) list
     ]
 
 listLength :: Int
