@@ -52,9 +52,6 @@ executable bench-list-append
     -- other-extensions:
     build-depends:    base >= 4.8.0.0 && < 5
                     , criterion
-                    , deepseq
-                    , sort-bench-hs
-                    , MonadRandom
     hs-source-dirs:   app
 
 test-suite tests
